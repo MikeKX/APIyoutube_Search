@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:background="@drawable/edittext_login_form"
+        android:hint="search"
+        android:inputType="textEmailAddress"
+        android:lines="1"
+        android:textColorHint="@color/colorWhite" />
+
+
+    <ImageView
+        android:id="@+id/img_List"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/editText"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/log" />
+
+
+    <TextView
+        android:id="@+id/txt_Title"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignTop="@+id/img_List"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:layout_toRightOf="@+id/img_List"
+        android:hint="Videos Title"
+        android:textColorHint="@color/colorWhite" />
+
+    <Button
+        android:id="@+id/button_Search"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignLeft="@+id/txt_Title"
+        android:layout_alignStart="@+id/txt_Title"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="125dp"
+        android:layout_marginStart="125dp"
+        android:background="@drawable/button_login_form"
+        android:hint="Videos Title"
+        android:text="search"
+        android:textColor="@color/colorWhite" />
+
+</RelativeLayout>
+
