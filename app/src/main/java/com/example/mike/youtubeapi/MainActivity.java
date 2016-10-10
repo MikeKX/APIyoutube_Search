@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<YoutubeModel> list = new ArrayList<>();
     private YoutubeAdapter mYoutubeAdapter;
     private SearchView search;
+
     private String token_page = "";
     private int count = 0;
 
@@ -51,9 +52,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        search =(SearchView)findViewById(R.id.search);
 
-        search = (SearchView) findViewById(R.id.search);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycleView);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         getDataFromYoutubeApi();
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getDataFromYoutubeApi() {
-        String urlJsonObj = "https://www.googleapis.com/youtube/v3/search?pageToken=" + token_page + "&part=snippet&key=AIzaSyAOl9P42AVJLTOniUzDBw5RmC161bJ3irI";
+        String urlJsonObj = "https://www.googleapis.com/youtube/v3/search?pageToken=" + token_page + "&part=snippet&key=AIzaSyDI5lFYHvzlED_OmF-nPk-e1Dcj6fFKdvs";
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 urlJsonObj, null, new Response.Listener<JSONObject>() {
             @Override
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
 
-                                    list.remove(list.size() - 1);
+                                    list.remove(list.size()-1);
                                     mYoutubeAdapter.notifyItemRemoved(list.size());
 
 
