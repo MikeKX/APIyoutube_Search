@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private List<YoutubeModel> list = new ArrayList<>();
     private YoutubeAdapter mYoutubeAdapter;
-    //private SearchView search;
+    private SearchView search;
     private String token_page = "";
     private int count = 0;
 
@@ -51,35 +52,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //search = (SearchView) findViewById(R.id.search);
+        search = (SearchView) findViewById(R.id.search);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         getDataFromYoutubeApi();
+
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    mYoutubeAdapter.getFilter().filter("");
+                    mYoutubeAdapter.notifyDataSetChanged();
+                } else {
+                    mYoutubeAdapter.getFilter().filter(newText.toString());
+                    mYoutubeAdapter.notifyDataSetChanged();
+                }
+                return true;
+            }
+        });
+
     }
-
-
-//
-//        //search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                if (TextUtils.isEmpty(newText)) {
-//                    mYoutubeAdapter.getFilter().filter("");
-//                    mYoutubeAdapter.notifyDataSetChanged();
-//                } else {
-//                    mYoutubeAdapter.getFilter().filter(newText.toString());
-//                    mYoutubeAdapter.notifyDataSetChanged();
-//                }
-//                return true;
-//            }
-//        });
-//
-//    }
 
 
     private void getDataFromYoutubeApi() {
@@ -124,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                                     getDataFromYoutubeApi();
 
                                 }
-                            }, 2000);
+                            }, 1000);
                         }
                     });
 
